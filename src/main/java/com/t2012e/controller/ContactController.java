@@ -5,6 +5,7 @@ import com.t2012e.entity.Contact;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Set;
 
 public class ContactController {
     Scanner scanner = new Scanner(System.in);
@@ -16,37 +17,28 @@ public class ContactController {
         String name = scanner.nextLine();
         System.out.println("Please enter phone: ");
         String phone = scanner.nextLine();
-        Contact contact1 = new Contact(name, phone);
-        list.add(contact1);
+        contact = new Contact(name, phone);
+        list.add(contact);
     }
 
-    public void display(){
-        {
-            System.out.printf("%10s%10s%10s | %10s%15s%10s\n",
-                    "", "Name", "",
-                    "", "Phone", "");
-            System.out.println("--------------------------------------------------------------------------------");
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println(list.get(i).toString());
-            }
-        }
-    }
-
-
-    public Contact findByName() {
+    public String findTelephoneNumber() {
         System.out.println("Pleaet enter name to search: ");
         String name = scanner.nextLine();
-        Contact contact = null;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getName().equals(name)) {
-                contact = list.get(i);
-                break;
-            }
-        }
-        return contact;
+        String phone;
+        phone = hashMap1.get(name);
+        return phone;
     }
 
-    public HashMap<String, String> hashMap(){
+
+    public void display(HashMap<String, String> hashMap) {
+        Set<String> keySet = hashMap.keySet();
+        System.out.println("Address Book");
+        for (String key : keySet) {
+            System.out.println(key + " - " + hashMap.get(key));
+        }
+    }
+
+    public HashMap<String, String> save(){
         for (int i = 0; i < list.size(); i++) {
             String key = list.get(i).getName();
             String phone = list.get(i).getPhone();
